@@ -58,22 +58,21 @@ public class SecretDecoder
     {
         encoder = new Hashtable <Character, HashSet<Character>[]>();
         dict = new Hashtable <Integer, ArrayList<String>>();
-	queue = new  PriorityQueue<QueueElement>(11, new Comparator<QueueElement>(){
+	    queue = new  PriorityQueue<QueueElement>(11, new Comparator<QueueElement>(){
 						
-							public int compare(QueueElement one,
-										QueueElement two)
-							{
-								if (one.getLen() > two.getLen())
-									return (1);
-								else if (one.getLen() < two.getLen())
-									return (-1);
-								if (getNumericValue(one.sub) > getNumericValue(two.sub))
-									return (1);
-								else if (getNumericValue(one.sub) < getNumericValue(two.sub))
-									return (-1);
-								return 0;
-							}
-						});
+				public int compare(QueueElement one,
+					  		QueueElement two)
+				{
+					if (one.getLen() > two.getLen())
+						return (1);
+					else if (one.getLen() < two.getLen())
+						return (-1);
+					if (getNumericValue(one.sub) > getNumericValue(two.sub))
+						return (1);
+					else if (getNumericValue(one.sub) < getNumericValue(two.sub))
+						return (-1);
+					return 0;
+                }});
     }
     
     public void intiliazeDict (Object[] words)
@@ -177,15 +176,14 @@ public class SecretDecoder
 
     public void displayDecodedMsg (String msg) 
     {
-	String[] tokens = msg.split("\\s");
-	StringBuffer buffer; 
+	    String[] tokens = msg.split("\\s");
+	    StringBuffer buffer; 
 	
-	for (int i = 0; i < tokens.length; i++) {
-		buffer = new StringBuffer();;
-		decodeCharacter (buffer, tokens[i], 0);
-		System.out.print(buffer + " ");
-	}
-
+	    for (int i = 0; i < tokens.length; i++) {
+		    buffer = new StringBuffer();;
+		    decodeCharacter (buffer, tokens[i], 0);
+		    System.out.print(buffer + " ");
+	    }
     } 
 
     public void decodeCharacter (StringBuffer buffer, String msg, int offset)
