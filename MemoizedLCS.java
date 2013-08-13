@@ -1,11 +1,12 @@
 /**
+ *
  * Author: Rajesh Gopidi
  *
  */
 
 import java.util.LinkedList;
 
-public class LCS 
+public class MemoizedLCS
 {
     private static int I = 1024;
     private static int J = 1;
@@ -14,12 +15,12 @@ public class LCS
     private int[][] indices;
     private int[] seq1, seq2;
 
-    public LCS ()
+    public MemoizedLCS ()
     {
 
     }
 
-    public LCS (int[] seq1, int[] seq2)
+    public MemoizedLCS (int[] seq1, int[] seq2)
     {
         this.seq1 = seq1;
         this.seq2 = seq2;
@@ -27,22 +28,25 @@ public class LCS
         indices = new int[seq1.length][seq2.length];
     }
 
-    public void computeLCS()
+    public int computeLCS(int i, int j)
     {
-        for (int i = 1; i < seq1.length; i++) {
-            for (int j = 1; j < seq2.length; j++) {
-                if (seq1[i] == seq2[j]) {
-                    length[i][j] = length[i-1][j-1] + 1;
-                    indices[i][j] = I * (i-1) + j-1;
-                } else if (length[i-1][j] >= length[i][j-1]) {
-                    length[i][j] = length[i-1][j];
-                    indices[i][j] = -(I * (i-1) + j); 
-                } else {
-                    length[i][j] = length[i][j-1];
-                    indices[i][j] =  -(I * (i) + j-1);
-                }
-            }
+        if ((i == 0) || (j == 0))
+            return 0;
+        
+        if (length[i][j] > 0)
+            return length[i][j];
+
+        if (seq1[i] == seq2[j]) {
+            length[i][j] = computeLCS(i-1, j-1) + 1;
+            indices[i][j] = I * (i-1) + j-1;
+        } else if (computeLCS(i-1, j) >= computeLCS(i, j-1)) {
+            length[i][j] = length[i-1][j];
+            indices[i][j] = -(I * (i-1) + j);
+        } else {
+            length[i][j] = length[i][j-1];
+            indices[i][j] =  -(I * (i) + j-1);
         }
+        return (length[i][j]);
     }
 
     public void displayLCS()
@@ -113,8 +117,8 @@ public class LCS
         int[] seq1 = {-99, 1,2,3,2,4,1,2};
         int[] seq2 = {-99,2,4,3,1,2,1};
 
-        LCS obj = new LCS(seq1, seq2);
-        obj.computeLCS();
+        MemoizedLCS obj = new MemoizedLCS(seq1, seq2);
+        obj.computeLCS(seq1.length-1, seq2.length-1);
         obj.displayLCS();
         obj.mDisplayLCS();
     }
