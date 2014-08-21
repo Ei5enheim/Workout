@@ -7,9 +7,12 @@ import java.io.*;
 
 public class ReadInput
 {
+    static ufferedReader reader = null;
 
     public int readInput () throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        if (reader != null )
+            reader = new BufferedReader(new InputStreamReader(System.in));
 
         int number = Integer.valueOf(reader.readLine());
 
