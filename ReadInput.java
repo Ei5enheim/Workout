@@ -7,14 +7,17 @@ import java.io.*;
 
 public class ReadInput
 {
-    static ufferedReader reader = null;
+    static BufferedReader reader = null;
 
     public int readInput () throws Exception {
 
-        if (reader != null )
+        int number = -1;
+        if (reader == null )
             reader = new BufferedReader(new InputStreamReader(System.in));
 
-        int number = Integer.valueOf(reader.readLine());
+        String line = reader.readLine();
+        if (line != null)
+            number = Integer.valueOf(line);
 
         System.out.println("number of TestCases " + number);
 
