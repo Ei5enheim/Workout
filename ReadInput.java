@@ -9,7 +9,7 @@ public class ReadInput
 {
     static BufferedReader reader = null;
 
-    public int readInput () throws Exception {
+    public static int readInput () throws Exception {
 
         int number = -1;
         if (reader == null )
@@ -19,9 +19,20 @@ public class ReadInput
         if (line != null)
             number = Integer.valueOf(line);
 
-        System.out.println("number of TestCases " + number);
+        //System.out.println("number of TestCases " + number);
 
         return number;
+    }
+
+    public static String readLine () throws Exception {
+
+        if (reader == null )
+            reader = new BufferedReader(new InputStreamReader(System.in));
+
+        String line = reader.readLine();
+
+        return (line);
+
     }
 
     public static void main (String[] args) {
