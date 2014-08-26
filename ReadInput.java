@@ -15,7 +15,7 @@ public class ReadInput
         if (reader == null )
             reader = new BufferedReader(new InputStreamReader(System.in));
 
-        String line = reader.readLine();
+        String line = reader.readLine().trim();
         if (line != null)
             number = Integer.valueOf(line);
 
@@ -29,7 +29,7 @@ public class ReadInput
         if (reader == null )
             reader = new BufferedReader(new InputStreamReader(System.in));
 
-        String line = reader.readLine();
+        String line = reader.readLine().trim();
 
         return (line);
 
